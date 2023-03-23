@@ -27,11 +27,11 @@ Full process has been tested as a completely fresh deploy to a new Google Accoun
 
 ---
 
-If your new to all this I'd STRONGLY recommend you follow the walkthrough verbatim - including naming choices.
+If you're new to all this I'd STRONGLY recommend you follow the walkthrough in order & verbatim - including naming choices.
 
-Don't change anything first time through as any changes may need to percolate through and cause confusion as you progess.
+Don't 'customize' anything as the sequence & naming decisions may have dependencies we've yet to cover.
 
-Of course, If experienced take what your need. My pleasure ;-)
+Of course, if experienced then take what you need. My pleasure ;-)
 
 ## Pre-requisites
 - Skills Experience
