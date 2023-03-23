@@ -1,7 +1,7 @@
 ---
 author: heidless
 pubDatetime: 2023-01-30T15:57:52.737Z
-title: Deploy 2 Google nextJS/dJango/POSTGRES
+title: nextJS deploy to Google Cloud Run
 postSlug: pfolio-deploy-google-cloud 
 featured: true
 ogImage: https://user-images.githubusercontent.com/53733092/215771435-25408246-2309-4f8b-a781-1f3d93bdf0ec.png
@@ -10,18 +10,111 @@ tags:
 description: Walkthrough deploying to Google Cloud. NextJS frontend with dJango backend & Postgres instance
 ---
 
-
-# Deploy a React Web Application to Google Cloud
+# Deploy a NextJS Web Application to Google Cloud
 https://www.youtube.com/watch?v=IjUnQ9kMnVo
 
-## Access app
-### https://pfolio-frontend-service-7dd5pbcoiq-nw.a.run.app/
 
-## setup
+## Context
+Have spent many moons shaving many Yaks to distill a simple process to deploy NextJS Apps to Cloud Run.
+
+Final bit of sexiness is the use of Git Triggers to automatically re-deploy & build on Git Commit.
+
+You Commit It. You've Deployed It!
+
+I've distilled & collated my notes into a step by step process to get your NextJS App live.
+
+Full process has been tested as a completely fresh deploy to a new Google Account.
+
+---
+
+If your new to all this I'd STRONGLY recommend you follow the walkthrough verbatim - including naming choices.
+
+Don't change anything first time through as any changes may need to percolate through and cause confusion as you progess.
+
+Of course, If experienced take what your need. My pleasure ;-)
+
+## Pre-requisites
+- Skills Experience
+  - linux command line
+  - 
+- Platform
+  - WSL-ubuntu(linux)
+- Tools & Env
+  - vsCode
+  - Git
+
+
+## Access app
+You will be creating a COMPLETELY separate install within your own Google Cloud Environment
+
+For a bit of motivation, Click here to view an example of the final deployment on Google Cloud.
+
+ (REPLACE): https://pfolio-frontend-service-7dd5pbcoiq-nw.a.run.app/
+
+![NextJS Google Cloud Run Deploy](https://storage.cloud.google.com/frontend-bucket-0/bg.png)
+
+Next time you see this will be in your own local environment & then Fully Deployed ;-)
+
+## Google signup/signin
+
+You'll need to use your Google Account.
+
+Create Google Account: https://support.google.com/accounts/answer/27441?hl=en
+
+Access Google Cloud: https://console.cloud.google.com/home/dashboard
+
+Create a New Project (this will be our sandbox):
+
+Clck Dropdown top-left -> 'New Project'
+
+Name project `nextjs-example-deploy`
+
+Click 'Create'
+
+This will create your project & assign an ID. 
+
+They may differ. Note both - with the ID being the more significant. If in doubt - use the ID.
+
+| Project Name             | Project ID              |
+| ------------------------ | ----------------------- |
+| `nextjs-example-deploy`  | `nextjs-example-deploy` |
+
+Make sure your active project is `nextjs-example-deploy` in Project Dropdown at top of page.
+
+## Local Setup
+
+We will be using WSL:Ubuntu on vScode
+
+### installs
+
+If needed, install VsCode: https://code.visualstudio.com/download
+
+You will also need to install Ubuntu-22.04 which we'll use in vsCode.
+
+https://apps.microsoft.com/store/detail/ubuntu-22042-lts/9PN20MSR04DW
+
+[ EXPAND/EXCEPTION HANDLING? ]
+
+### vsCode
+
+Open vsCode
+
+'Open a Remote Window' by clicking on the icon at the extreme bottom-left of the App Screen. It will also likely be highlit.
+
+
+
+
+
+
+Open vsCode
+
+
+
+
 
 ### package.json
 
-```
+```js
 # ensure 'start' references $PORT
 # allows cloud run to manage random PORT
  "scripts": {
