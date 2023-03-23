@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   id="svg2"
+   width="391.32547"
+   height="42.71032"
+   viewBox="0 0 391.32547 42.710319"
+   sodipodi:docname="blog-design.svg"
+   inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs6" />
+  <sodipodi:namedview
+     id="namedview4"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="1.1371528"
+     inkscape:cx="178.51603"
+     inkscape:cy="199.18168"
+     inkscape:window-width="1920"
+     inkscape:window-height="1001"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g8" />
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="Image"
+     id="g8"
+     transform="translate(-9.8686152,-11.690086)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:45px;font-family:CarbonType;-inkscape-font-specification:CarbonType;fill:#31a1a8;fill-opacity:0.968627;stroke:#fdfc01;stroke-width:0"
+       x="9.0261211"
+       y="44.714989"
+       id="text347"
+       inkscape:export-filename="scrummingIT-logo.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan345"
+         x="9.0261211"
+         y="44.714989">scrumming IT</tspan></text>
+  </g>
+</svg>
