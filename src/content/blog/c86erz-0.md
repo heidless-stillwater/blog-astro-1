@@ -24,7 +24,7 @@ I have the honour of managing the website. The site is aimed to promote and enab
 
 Visit the Website: https://community.mimeworks.com/
 
-Founder, Paul-Verral Walcott was featured in a compelly profile on The Russell Howard Hour.
+Founder, Paul-Verral Walcott was featured in a compelling profile on The Russell Howard Hour.
 
 ![c86erz - Russell Howard Hour](https://storage.cloud.google.com/frontend-bucket-0/sdsh/russellhoward.jpg?authuser=0)
 
