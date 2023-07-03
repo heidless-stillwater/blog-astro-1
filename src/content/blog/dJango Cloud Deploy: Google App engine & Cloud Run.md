@@ -2,7 +2,7 @@
 author: heidless
 pubDatetime: 2023-01-30T15:57:52.737Z
 title: nextJS deploy to Google Cloud Run
-postSlug: pfolio-deploy-google-cloud 
+postSlug: pfolio-deploy-google-cloud
 featured: true
 draft: false
 ogImage: https://user-images.githubusercontent.com/53733092/215771435-25408246-2309-4f8b-a781-1f3d93bdf0ec.png
@@ -12,10 +12,11 @@ description: Walkthrough deploying to Google Cloud. NextJS frontend with dJango 
 ---
 
 # Deploy a NextJS Web Application to Google Cloud
+
 https://www.youtube.com/watch?v=IjUnQ9kMnVo
 
-
 ## Context
+
 Have spent many moons shaving many Yaks to distill a simple process to deploy NextJS Apps to Cloud Run.
 
 Final bit of sexiness is the use of Git Triggers to automatically re-deploy & build on Git Commit.
@@ -35,22 +36,22 @@ Don't 'customize' anything as the sequence & naming decisions may have dependenc
 Of course, if experienced then take what you need. My pleasure ;-)
 
 ## Pre-requisites
+
 - Skills Experience
   - linux command line
-  - 
 - Platform
   - WSL-ubuntu(linux)
 - Tools & Env
   - vsCode
   - Git
 
-
 ## Access app
+
 You will be creating a COMPLETELY separate install within your own Google Cloud Environment
 
 For a bit of motivation, Click here to view an example of the final deployment on Google Cloud.
 
- (REPLACE): https://pfolio-frontend-service-7dd5pbcoiq-nw.a.run.app/
+(REPLACE): https://pfolio-frontend-service-7dd5pbcoiq-nw.a.run.app/
 
 ![NextJS Google Cloud Run Deploy](https://storage.cloud.google.com/frontend-bucket-0/bg.png)
 
@@ -72,13 +73,13 @@ Name project `nextjs-example-deploy`
 
 Click 'Create'
 
-This will create your project & assign an ID. 
+This will create your project & assign an ID.
 
 They may differ. Note both - with the ID being the more significant. If in doubt - use the ID.
 
-| Project Name             | Project ID              |
-| ------------------------ | ----------------------- |
-| `nextjs-example-deploy`  | `nextjs-example-deploy` |
+| Project Name            | Project ID              |
+| ----------------------- | ----------------------- |
+| `nextjs-example-deploy` | `nextjs-example-deploy` |
 
 Make sure your active project is `nextjs-example-deploy` in Project Dropdown at top of page.
 
@@ -102,16 +103,7 @@ Open vsCode
 
 'Open a Remote Window' by clicking on the icon at the extreme bottom-left of the App Screen. It will also likely be highlit.
 
-
-
-
-
-
 Open vsCode
-
-
-
-
 
 ### package.json
 
@@ -124,15 +116,16 @@ Open vsCode
     "start": "next start -p $PORT",
     "lint": "next lint"
   },
-  
+
 # test by specifying port
 npm run build
 npm start 5000
 ```
 
-
 ## docker
+
 ### Dockerfile
+
 ```
 vi Dockerfile
 # base image
@@ -154,12 +147,14 @@ CMD ["npm", "start"]
 ```
 
 ### build | run
+
 ```
 docker build . -t cloudrun-app-alpine:latest
 docker run -p 3000:3000 -e=PORT=3000 cloudrun-app-alpine
 ```
 
 ## storage bucket
+
 ```
 # project
 pfolio-frontend-deploy-0
@@ -171,41 +166,51 @@ frontend-bucket-0
 -
 ```
 
-
 ## Cloud Run
-### configure
+
+### new project
+
+<brendan-sites>
+
 ```
-https://console.cloud.google.com/run/create?enableapi=true&authuser=0&hl=en_GB&project=pfolio-backend-deploy-0-380215
+https://console.cloud.google.com/run/create?enableapi=true&authuser=0&hl=en_GB&project=brendan-sites
 
 'Cloud Run'->Create Service
 -
-pfolio-frontend-service
-'Setup Cloud Build'
-< pick repository >
+pf-frontend-west1
+- 'continuously deploy'->'Setup Cloud Build'
+- < pick repository >
+
+service name: pf-frontend-west1
+region: europe-west1
+'Allow unauthenticated invocations'
 'save'
+
 -
 
 # register container
 'Container Registry'-> enable if not already done so
 
 # service account
-'IAM & ADMIN'->Service Accounts
+'IAM & ADMIN'->Service Accounts->'Create Service Account'
 -
-NAME: nextjs-cloudrun-app-bot
+NAME: pfolio-frontend-svcaccount
 DESC: service account for github actions
 ROLES:
-Editor
-Cloud Run Admin
-Storage Admin
-Service Account User
+- Editor
+- Cloud Run Admin
+- Storage Admin
+- Service Account User
 'DONE'
 
 # newly created instance
+Open Service
+- pf-frontend-west1
 ' 3 dots'->Manage Keys->Add Key->JSON
 
 # keyfile auto downloads
 # copy to project root dir
-i.e. pfolio-backend-deploy-0-380215-8f9cc9423783.json
+i.e. brendan-sites-51a8b2a257fb.json
 
 # enable Registry API - IF NEEDED
 'Container Registery'-'enable'
@@ -216,11 +221,12 @@ i.e. pfolio-backend-deploy-0-380215-8f9cc9423783.json
 ```
 
 ## configure github workflows
+
 ```
 # in project root dir
 vi .github/workflows/cloud-run.yml
 -
-europ-west2
+europe-west1
 -
 
 # refresh gitub
@@ -229,21 +235,32 @@ git commit -m "added .github structure"
 
 # github secrets
 # encode service account key
-i.e.base64 -i pfolio-backend-deploy-0-380215-8f9cc9423783.json
+```
+
+base64 -i brendan-sites-51a8b2a257fb.json > github-secret
+
+```
 
 <github repository>->Settings->Secrets & Variables->Actions
 'New Repository Secret'
+FRONTEND_WEST1_SECRET
+copy-paste contents of 'github-secret'
+
+
 -
-CLOUD_RUN_PROJECT_NAME=pfolio-frontend-deploy-0
-CLOUD_RUN_SERVICE_ACCOUNT=`base64 -i pfolio-backend-deploy-0-380215-8f9cc9423783.json`
+CLOUD_RUN_PROJECT_NAME=brendan-sites
+CLOUD_RUN_SERVICE_ACCOUNT=`base64 -i brendan-sites-51a8b2a257fb.json`
 -
 
 # now trigger a build to confirm success/failure
-<github repository>->Actions-><workflow of interest>
+'github.com'
+<github repository>->Settings->Actions-><workflow of interest>
 ```
 
 ## refresh install of SDK
+
 https://cloud.google.com/sdk/docs/install#deb
+
 ```
 sudo apt-get install apt-transport-https ca-certificates gnupg
 
@@ -256,6 +273,7 @@ sudo apt-get update && sudo apt-get install google-cloud-cli
 ```
 
 ## Cloud Run: enable permissions
+
 ```
 'Cloud Run'-><app service>->Triggers->Allow Unauthenticated invocations
 
@@ -265,6 +283,7 @@ gcloud run services add-iam-policy-binding nextjs-test \
 ```
 
 ## continuous deployment
+
 ```
 'Cloud Run'->Service Details->Setup Continuous Deployment
 -
@@ -274,43 +293,23 @@ gcloud run services add-iam-policy-binding nextjs-test \
 ```
 
 ## access frontend app
+
 ```
 PROJECT: pfolio-frontend-deploy-0->Cloud Run->pfolio-frontend-service
 ```
+
 https://pfolio-frontend-service-7dd5pbcoiq-nw.a.run.app
 
-
 ## backups
+
 ### frontend
+
 ```
 STORAGE BUCKET: pfolio-frontend-deploy-0->'Cloud Storage'
 -
 frontend-bucket-0
 -
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 Astro 2.0 has been released with some cool features, breaking changes, DX improvements, better error overlay and so on. AstroPaper takes advantage of those cool features, especially Content Collections API.
 
